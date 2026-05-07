@@ -1,0 +1,15 @@
+# PyCharm
+.idea/
+*.iml
+
+# Database files
+*.db
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
