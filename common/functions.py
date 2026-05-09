@@ -68,16 +68,23 @@ def mean_squared_error(y, t):
     return 0.5 * np.sum((y - t) ** 2)
 
 # 交叉熵误差
+
 def cross_entropy(y, t):
     # 将y转为二维
     if y.ndim == 1:
         t = t.reshape(1, t.size)
         y = y.reshape(1, y.size)
-    # 将t转换为顺序编码（类别标签）
-    if t.size == y.size:
+
+    # 如果t是one-hot编码(与y形状相同),转换为类别索引
+    if t.ndim == 2 and t.size == y.size:
         t = t.argmax(axis=1)
+    elif t.ndim == 1:
+        # 如果t已经是一维的类别标签,确保它是整数类型
+        t = t.astype(int)
+
     n = y.shape[0]
-    return -np.sum( np.log(y[np.arange(n), t] + 1e-10) ) / n
+    return -np.sum(np.log(y[np.arange(n), t] + 1e-10)) / n
+
 
 
 
